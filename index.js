@@ -18,7 +18,8 @@ app.set('view engine','ejs');
 // Sessions
 
 app.use(session({
-    secret: "qualquercoisa", cookie: { maxAge: 30000000 }
+    secret: "qualquercoisa", cookie: { maxAge: 30000000 },
+    saveUninitialized: false
 }))
 
 // Static
@@ -30,13 +31,11 @@ app.use(bodyParser.json());
 
 // Database
 
-connection
-    .authenticate()
-    .then(() => {
-        console.log("Conexão feita com sucesso!");
-    }).catch((error) => {
-        console.log(error);
-    })
+connection.authenticate().then(() => {
+    console.log("Conexão feita com sucesso!");
+}).catch((error) => {
+    console.log(error);
+})
 
 
 app.use("/",categoriesController);    
